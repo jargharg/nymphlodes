@@ -1,0 +1,33 @@
+@import './tailwind.css';
+@import './fonts.css';
+
+*,
+*::after,
+*::before {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: antialiased;
+  backface-visibility: hidden;
+  font-kerning: normal;
+  text-box: trim-both cap alphabetic;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+*::selection {
+  @apply bg-black/80 text-white;
+  
+}
+
+.bg-black::selection {
+  @apply bg-white/80 text-black;
+  
+}
+
+.bg-white::selection {
+  background: #000;
+  color: #fff;
+}
