@@ -1,6 +1,6 @@
 <template>
   <Song :song-id="songId" :title="'High Days & Holy Days'">
-    <img :src="imageSrc" class="image" aria-hidden="true">
+    <img :src="imageSrc" class="image" aria-hidden="true" fetchpriority="high">
     <img ref="elImageInner" :src="imageSrc" class="image image--inner" aria-hidden="true">
   </Song>
 </template>
