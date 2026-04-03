@@ -8,7 +8,10 @@ const createHowl = (id, volume = 0.8) => {
     preload: 'metadata',
     volume,
     onend: () => {
-      console.log('Finished!')
+      const songStore = useSongStore()
+      if (songStore.currentSongId === id) {
+        songStore.reset()
+      }
     },
   })
 }
@@ -37,7 +40,7 @@ export const useSongStore = defineStore('song', {
         return songs[state.currentSongId]
       }
     },
-    
+
     songProgress(state) {
       if (!state.currentSongId) {
         return 0
@@ -47,8 +50,6 @@ export const useSongStore = defineStore('song', {
       if (!song) {
         return 0
       }
-      
-      console.log(song.file.seek() / song.file.duration())
 
       return song.file.seek() / song.file.duration()
     },
@@ -83,7 +84,7 @@ export const useSongStore = defineStore('song', {
       this.currentSong?.file.pause()
       this.isPlaying = false
     },
-    
+
     toggle() {
       if (this.isPlaying) {
         this.pause()
@@ -95,6 +96,11 @@ export const useSongStore = defineStore('song', {
     stop() {
       this.currentSong?.file.stop()
       this.isPlaying = false
+    },
+
+    reset() {
+      this.stop()
+      this.currentSongId = null
     },
   },
 })

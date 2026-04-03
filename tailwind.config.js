@@ -18,7 +18,12 @@ export default {
       }],
     },
 
-    extend: {},
+    extend: {
+      screens: {
+        '2xs': '375px',
+        xs: '475px',
+      },
+    },
   },
   plugins: [],
 }

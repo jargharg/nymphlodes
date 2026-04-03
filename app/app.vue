@@ -1,6 +1,6 @@
 <template>
   <main class="main-grid">
-    <h1 class="logo">{{ `Nymph\nLodes` }}</h1>
+    <h1 class="logo"><img src="/images/nymph-lodes-logo.svg" alt="Nymph Lodes" ></h1>
 
     <div class="intro">
       <p>
@@ -31,8 +31,6 @@
       <a href="https://soundcloud.com/nymph-lodes" target="_blank" rel="noopener noreferrer">SoundCloud</a>
     </div>
   </main>
-
-  <PlayOverlay />
 </template>
 
 <script lang="ts">
@@ -70,25 +68,34 @@ export default {
 .main-grid {
   @apply relative lg:fixed top-0 left-0;
   @apply w-full overflow-hidden mx-auto;
-  @apply grid items-center justify-center gap-1 py-1;
-  max-width: clamp(375px, 70vw, 1200px);
+  @apply grid items-center justify-center gap-1 pb-10;
+  // max-width: clamp(375px, 70vw, 1200px);
   grid-template:
     'logo'
     'intro'
+    'high'
     'grave'
     'cults'
     'dual'
-    'high-days'
     'stars'
     'creds' / 1fr;
 
-  @screen sm {
+  @screen xs {
     @apply py-0 max-w-none;
 
     grid-template:
+      'logo intro' auto
+      'high stars' auto
+      'cults dual' auto
+      'creds grave' auto / 1fr 1fr;
+  }
+  
+  @screen md {
+    grid-template:
       'high logo logo' auto
       'stars cults intro' auto
-      'creds dual grave' auto / 1fr 1fr 1fr;
+      'stars cults creds' auto
+      '. dual grave' auto / 1fr 1fr 1fr;
   }
 
   @screen lg {
@@ -101,12 +108,16 @@ export default {
 }
 
 .logo {
-  @apply font-serif text-px67 text-center whitespace-pre-wrap grid z-20 relative;
+  @apply z-20 relative w-full max-w-sm mx-auto px-1 2xs:p-0;
   grid-area: logo;
+  
+  img {
+    width: 100%;
+  }
 }
 
 .intro {
-  @apply h-full items-start justify-start leading-[0.9] text-justify;
+  @apply h-full items-start justify-start leading-[0.9] text-justify px-1 2xs:p-0;
   font-size: clamp(12px, 1.15vw, 17.4px);
   grid-area: intro;
 }
@@ -134,12 +145,12 @@ export default {
 }
 
 .creds {
-  @apply text-[14px] leading-[0.9] flex flex-col gap-8 text-right h-full;
+  @apply text-[14px] leading-[0.9] flex justify-between items-end lg:justify-start lg:flex-col gap-8 text-right h-full p-4 2xs:px-0 md:p-0;
   grid-area: creds;
   font-size: clamp(12px, 1.15vw, 17.4px);
 
   a {
-    @apply underline underline-offset-0 hover:decoration-transparent transition-colors;
+    @apply underline underline-offset-1 2xl:underline-offset-0 hover:decoration-transparent transition-colors;
   }
 }
 </style>

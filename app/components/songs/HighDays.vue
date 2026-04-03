@@ -22,7 +22,6 @@ export default {
     const songStore = useSongStore()
 
     watch([() => songStore.isPlaying, () => songStore.currentSongId], ([isPlaying, currentSongId]) => {
-      console.log(songStore.currentSongId)
       if (currentSongId !== songId) {
         endTl()
         return
