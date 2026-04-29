@@ -1,7 +1,9 @@
 <template>
   <button class="song" @click="onClick">
     <h2 class="title">{{ title }}</h2>
-    <slot />
+
+    <img v-for="(_, index) in Array(5)" :key="index" ref="elsImages" :src="imageSrc" class="image" aria-hidden="true"
+      :style="{ '--radius': index > 0 && `${60 - (index * 10)}%` }">
 
     <div :class="['play-state', playState]">
       <svg v-if="playState === 'playing'" viewBox="5 0 42 68" fill="none" stroke="currentColor" stroke-width="1"
@@ -37,12 +39,22 @@ export default {
       type: String,
       required: true,
     },
+
+    imageSrc: {
+      type: String,
+      required: true,
+    },
   },
 
   setup(props) {
     const songStore = useSongStore()
     const song = songs[props.songId]
+
     let shouldUpdateProgress = false
+
+    const songProgress = ref(0)
+    const elsImages = ref([])
+    const tls = ref([])
 
     const updateProgress = () => {
       if (shouldUpdateProgress) {
@@ -50,6 +62,41 @@ export default {
         requestAnimationFrame(updateProgress)
       }
     }
+
+    const onClick = () => {
+      songStore.setCurrentSongId(props.songId)
+      console.log(songStore);
+
+      if (songStore.isPlaying) {
+        songStore.pause()
+        shouldUpdateProgress = false
+      } else {
+        songStore.play()
+        shouldUpdateProgress = true
+        requestAnimationFrame(updateProgress)
+      }
+    }
+
+    const startTls = () => {
+      tls.value.forEach(tl => gsap.to(tl, { timeScale: 1, ease: 'circ.out', duration: 2, overwrite: true }))
+    }
+
+    const pauseTls = () => {
+      tls.value.forEach(tl => gsap.to(tl, { timeScale: 0, ease: 'circ.out', duration: 2, overwrite: true }))
+    }
+
+    const endTls = () => {
+      tls.value.forEach(tl => gsap.to(tl, { progress: 0, ease: 'power3.inOut', duration: 2, timeScale: 0, overwrite: true }))
+    }
+
+    onMounted(() => {
+      tls.value = elsImages.value.slice(1).map((elImage, index) => {
+        return gsap
+          .timeline({ repeat: -1 })
+          .to(elImage, { rotation: 360, duration: 12 + index * 5, delay: -index * 5, ease: 'none' })
+          .timeScale(0)
+      })
+    })
 
     const playState = computed(() => {
       if (songStore.currentSongId !== props.songId) {
@@ -75,22 +122,21 @@ export default {
       }
     })
 
-    const songProgress = ref(0)
-
-    const onClick = () => {
-      songStore.setCurrentSongId(props.songId)
-
-      if (songStore.isPlaying) {
-        songStore.pause()
-        shouldUpdateProgress = false
-      } else {
-        songStore.play()
-        shouldUpdateProgress = true
-        requestAnimationFrame(updateProgress)
+    watch([() => songStore.isPlaying, () => songStore.currentSongId], ([isPlaying, currentSongId]) => {
+      if (currentSongId !== props.songId) {
+        endTls()
+        return
       }
-    }
+
+      if (isPlaying) {
+        startTls()
+      } else {
+        pauseTls()
+      }
+    })
 
     return {
+      elsImages,
       onClick,
       playState,
       songProgress,
@@ -102,7 +148,7 @@ export default {
 <style lang="scss" scoped>
 .song {
   @apply relative h-full aspect-square overflow-hidden text-[10px];
-  
+
   @screen xs {
     font-size: clamp(15px, 1.6vw, 17.4px);
   }
@@ -135,6 +181,11 @@ export default {
   &.paused {
     --opacity: 1;
   }
+}
+
+.image {
+  @apply absolute top-0 left-0 size-full object-cover overflow-auto pointer-events-none;
+  clip-path: circle(var(--radius) at center);
 }
 
 .progress-bar {

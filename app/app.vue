@@ -1,5 +1,9 @@
 <template>
   <main>
+    <img v-if="!!currentSongId && isPlaying" :src="`/images/${currentSongId}.avif`" aria-hidden="true"
+      class="fixed top-0 left-0 w-full h-full object-cover z-0 pointer-events-none mix-blend-difference opacity-50"
+      style="image-rendering: pixelated;">
+
     <div class="main-grid">
       <h1 class="logo"><img src="/images/nymph-lodes-logo.svg" alt="Nymph Lodes"></h1>
 
@@ -21,7 +25,7 @@
 
       <Acrobats class="song--acrobats" />
 
-      <Hypno class="song--hypno" />
+      <Hypnotize class="song--hypno" />
 
       <BareLegs class="song--bare-legs" />
 
@@ -38,7 +42,7 @@
       <Graveyard class="song--graveyard" />
 
       <p class="copyright">&copy; Nymph Lodes Productions {{ new Date().getFullYear()
-      }}</p>
+        }}</p>
 
       <p class="pronunciation">nɪmf ləʊdz</p>
     </div>
@@ -53,7 +57,7 @@ import Cults from './components/songs/Cults.vue'
 import DualRealities from './components/songs/DualRealities.vue'
 import Graveyard from './components/songs/Graveyard.vue'
 import HighDays from './components/songs/HighDays.vue'
-import Hypno from './components/songs/Hypno.vue'
+import Hypnotize from './components/songs/Hypnotize.vue'
 import Stars from './components/songs/Stars.vue'
 
 export default {
@@ -64,12 +68,16 @@ export default {
     DualRealities,
     Graveyard,
     HighDays,
-    Hypno,
+    Hypnotize,
     Stars,
   },
 
   setup() {
     const songStore = useSongStore()
+
+    const currentSongId = computed(() => songStore.currentSongId)
+
+    const isPlaying = computed(() => songStore.isPlaying)
 
     onMounted(() => {
       document.addEventListener('keydown', (e) => {
@@ -78,16 +86,31 @@ export default {
         }
       })
     })
+
+    return {
+      currentSongId,
+      isPlaying,
+    }
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.main-grid {
+.main-grid,
+.btf-grid {
+  --gap: theme('spacing.1');
   @apply relative;
   @apply w-full overflow-hidden mx-auto;
-  @apply grid items-center justify-center gap-1 pb-10;
+  @apply grid items-center justify-center;
+  gap: var(--gap);
 
+  @screen md {
+    @apply h-svh;
+    --gap: 0;
+  }
+}
+
+.main-grid {
   grid-template:
     'logo logo'
     'intro intro'
@@ -96,8 +119,6 @@ export default {
     / 1fr 1fr;
 
   @screen xs {
-    @apply py-0 max-w-none;
-
     grid-template:
       'logo intro' auto
       'high acro' 1fr
@@ -105,8 +126,6 @@ export default {
   }
 
   @screen md {
-    @apply h-svh gap-0;
-
     grid-template:
       'logo  .      high ' 1fr
       'intro bare  . ' 1fr
@@ -115,12 +134,38 @@ export default {
   }
 
   @screen lg {
-    @apply h-svh gap-0;
     grid-template:
       '.     high  .     .     .    ' 1fr
       '.     .     logo  .     acro ' 1fr
       'hypno .     intro .     .    ' 1fr
       '.     .     .     bare  btf  ' 1fr / 1fr 1fr 40ch 1fr 1fr;
+  }
+}
+
+.btf-grid {
+  padding-top: var(--gap);
+
+  grid-template:
+    'stars cults' auto
+    'dual  grave' auto
+    'pro   copy' auto / 1fr 1fr;
+
+  @screen md {
+    grid-template:
+      '. . stars' auto
+      'cults . .' auto
+      '. dual .' auto
+      'grave . .' auto
+      'pro . copy' auto / 35ch 1fr 1fr;
+  }
+
+  @screen lg {
+    grid-template:
+      '.   . stars         .     .    ' 1fr
+      'cults     .     .     .  .    ' 1fr
+      ' .      .       . dual     .    ' 1fr
+      '.    grave .    .       .      ' 1fr
+      'pro    .     .    .       copy  ' auto / 1fr 1fr 40ch 1fr 1fr;
   }
 }
 
@@ -196,49 +241,6 @@ export default {
   }
 }
 
-.btf-grid {
-  @apply relative pt-1;
-  @apply w-full overflow-hidden mx-auto;
-  @apply grid items-center justify-center gap-1;
-
-  grid-template:
-    'stars'
-    'cults'
-    'dual'
-    'grave'
-    / 1fr;
-
-  @screen xs {
-    @apply max-w-none;
-
-    grid-template:
-      'stars cults' auto
-      'dual  grave' auto
-      'pro   copy' auto / 1fr 1fr;
-  }
-
-  @screen md {
-    @apply py-0 h-svh gap-0;
-
-    grid-template:
-      '. . stars' auto
-      'cults . .' auto
-      '. dual .' auto
-      'grave . .' auto
-      'pro . copy' auto / 35ch 1fr 1fr;
-  }
-
-  @screen lg {
-    @apply h-svh gap-0;
-    grid-template:
-      '.   . stars         .     .    ' 1fr
-      'cults     .     .     .  .    ' 1fr
-      ' .      .       . dual     .    ' 1fr
-      '.    grave .    .       .      ' 1fr
-      'pro    .     .    .       copy  ' auto / 1fr 1fr 40ch 1fr 1fr;
-  }
-}
-
 .pronunciation {
   @apply justify-start cursor-default;
   grid-area: pro;
@@ -246,7 +248,6 @@ export default {
 
 .copyright {
   @apply cursor-default;
-  
   grid-area: copy;
 }
 </style>

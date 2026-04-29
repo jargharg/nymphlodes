@@ -17,7 +17,7 @@ const createHowl = (id, volume = 0.8) => {
 }
 
 export const songs = {
-  'high-days-and-holy-days': { isPlaying: false, file: createHowl('high-days-and-holy-days', 1) },
+  'high-days-holy-days': { isPlaying: false, file: createHowl('high-days-holy-days', 1) },
   'cults': { isPlaying: false, file: createHowl('cults') },
   'dual-realities': { isPlaying: false, file: createHowl('dual-realities') },
   'stars': { isPlaying: false, file: createHowl('stars') },
