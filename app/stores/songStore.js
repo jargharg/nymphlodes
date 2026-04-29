@@ -22,6 +22,9 @@ export const songs = {
   'dual-realities': { isPlaying: false, file: createHowl('dual-realities') },
   'stars': { isPlaying: false, file: createHowl('stars') },
   'graveyard-tourist': { isPlaying: false, file: createHowl('graveyard-tourist') },
+  'hypnotize': { isPlaying: false, file: createHowl('hypnotize') },
+  'bare-legs-night-dress': { isPlaying: false, file: createHowl('bare-legs-night-dress') },
+  'acrobats': { isPlaying: false, file: createHowl('acrobats') },
 }
 
 export const useSongStore = defineStore('song', {

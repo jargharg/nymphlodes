@@ -1,53 +1,71 @@
 <template>
-  <main class="main-grid">
-    <h1 class="logo"><img src="/images/nymph-lodes-logo.svg" alt="Nymph Lodes" ></h1>
+  <main>
+    <div class="main-grid">
+      <h1 class="logo"><img src="/images/nymph-lodes-logo.svg" alt="Nymph Lodes"></h1>
 
-    <div class="intro">
-      <p>
-        Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
-        cubilia curae; Nullam commodo est at ante pellentesque, ac viverra urna eleifend. Curabitur iaculis, erat sit
-        amet bibendum bibendum, purus nisl tristique ex, eu eleifend arcu nunc sed velit. Pellentesque habitant morbi
-        tristique senectus et netus et malesuada fames ac turpis egestas. Etiam erat arcu, euismod sit amet suscipit
-        non, iaculis vel dui. In eleifend nec nibh nec semper. Pellentesque odio velit, elementum quis consequat ac,
-        commodo at risus. Nulla facilisi. Ut malesuada posuere efficitur. Morbi a consequat nunc. Nunc ac imperdiet
-        nulla, non ultricies nisl. Ut malesuada posuere efficitur. Morbi a consequat nunc. Nunc ac imperdiet
-        nulla, non ultricies nisl. Aenean vestibulum nisl dui, ac gravida lorem sollicitudin in. Pellentesque eu
-        condimentum odio, id mattis eros.
-      </p>
+      <div class="intro">
+        <div class="intro__content">
+          <p>new music from the moors.</p>
+          <p>where once were witches, now are <img class="h-[0.9em] inline-block"
+              src="/images/nymph-lodes-logo-landscape.svg" alt="Nymph Lodes"> — partners in music and marriage.</p>
+          <p>mildly mystical, slightly psychedelic songs about stars, cults, babes and other phenomena.</p>
+        </div>
+
+        <div class="intro__creds">
+          <a href="https://www.instagram.com/_nymphlodes_" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a href="https://soundcloud.com/nymph-lodes" target="_blank" rel="noopener noreferrer">SoundCloud</a>
+        </div>
+      </div>
+
+      <HighDays class="song--high-days" />
+
+      <Acrobats class="song--acrobats" />
+
+      <Hypno class="song--hypno" />
+
+      <BareLegs class="song--bare-legs" />
+
+      <a class="btf-link" href="#btf">older stuff &darr;</a>
     </div>
 
-    <HighDays class="song--high-days" />
+    <div id="btf" class="btf-grid">
+      <Stars class="song--stars" />
 
-    <Stars class="song--stars" />
+      <Cults class="song--cults" />
 
-    <Cults class="song--cults" />
+      <DualRealities class="song--dual-realities" />
 
-    <DualRealities class="song--dual-realities" />
+      <Graveyard class="song--graveyard" />
 
-    <Graveyard class="song--graveyard" />
+      <p class="copyright">&copy; Nymph Lodes Productions {{ new Date().getFullYear()
+      }}</p>
 
-    <div class="creds">
-      <a href="https://www.instagram.com/_nymphlodes_" target="_blank" rel="noopener noreferrer">Instagram</a>
-      <a href="https://soundcloud.com/nymph-lodes" target="_blank" rel="noopener noreferrer">SoundCloud</a>
+      <p class="pronunciation">nɪmf ləʊdz</p>
     </div>
   </main>
 </template>
 
 <script lang="ts">
-import Cults from './components/songs/Cults.vue'
-import HighDays from './components/songs/HighDays.vue'
-import DualRealities from './components/songs/DualRealities.vue'
-import Stars from './components/songs/Stars.vue'
-import Graveyard from './components/songs/Graveyard.vue'
 import { useSongStore } from './stores/songStore'
+import Acrobats from './components/songs/Acrobats.vue'
+import BareLegs from './components/songs/BareLegs.vue'
+import Cults from './components/songs/Cults.vue'
+import DualRealities from './components/songs/DualRealities.vue'
+import Graveyard from './components/songs/Graveyard.vue'
+import HighDays from './components/songs/HighDays.vue'
+import Hypno from './components/songs/Hypno.vue'
+import Stars from './components/songs/Stars.vue'
 
 export default {
   components: {
+    Acrobats,
+    BareLegs,
     Cults,
-    HighDays,
     DualRealities,
-    Stars,
     Graveyard,
+    HighDays,
+    Hypno,
+    Stars,
   },
 
   setup() {
@@ -66,69 +84,91 @@ export default {
 
 <style lang="scss" scoped>
 .main-grid {
-  @apply relative lg:fixed top-0 left-0;
+  @apply relative;
   @apply w-full overflow-hidden mx-auto;
   @apply grid items-center justify-center gap-1 pb-10;
-  // max-width: clamp(375px, 70vw, 1200px);
+
   grid-template:
-    'logo'
-    'intro'
-    'high'
-    'grave'
-    'cults'
-    'dual'
-    'stars'
-    'creds' / 1fr;
+    'logo logo'
+    'intro intro'
+    'high acro'
+    'hypno bare'
+    / 1fr 1fr;
 
   @screen xs {
     @apply py-0 max-w-none;
 
     grid-template:
       'logo intro' auto
-      'high stars' auto
-      'cults dual' auto
-      'creds grave' auto / 1fr 1fr;
+      'high acro' 1fr
+      'bare hypno' 1fr / 1fr 1fr;
   }
-  
+
   @screen md {
+    @apply h-svh gap-0;
+
     grid-template:
-      'high logo logo' auto
-      'stars cults intro' auto
-      'stars cults creds' auto
-      '. dual grave' auto / 1fr 1fr 1fr;
+      'logo  .      high ' 1fr
+      'intro bare  . ' 1fr
+      'intro .      hypno' 1fr
+      'intro  acro  btf' 1fr / 35ch 1fr 1fr;
   }
 
   @screen lg {
     @apply h-svh gap-0;
-    grid-template: 'intro . high . .' 1fr
-      'intro . logo . stars' 1fr
-      'intro cults logo . .' 1fr
-      'dual . . grave creds' 1fr / 1fr 1fr auto 1fr 1fr;
+    grid-template:
+      '.     high  .     .     .    ' 1fr
+      '.     .     logo  .     acro ' 1fr
+      'hypno .     intro .     .    ' 1fr
+      '.     .     .     bare  btf  ' 1fr / 1fr 1fr 40ch 1fr 1fr;
   }
 }
 
 .logo {
-  @apply z-20 relative w-full max-w-sm mx-auto px-1 2xs:p-0;
+  @apply z-20 relative w-full max-w-sm mx-auto;
   grid-area: logo;
-  
+
   img {
     width: 100%;
   }
 }
 
+.btf-link,
+.copyright,
+.pronunciation {
+  @apply text-[10px] items-end justify-end h-full p-4 grid;
+}
+
+.btf-link {
+  grid-area: btf;
+  @apply hidden md:grid;
+}
+
 .intro {
-  @apply h-full items-start justify-start leading-[0.9] text-justify px-1 2xs:p-0;
-  font-size: clamp(12px, 1.15vw, 17.4px);
+  @apply h-full flex flex-col justify-between gap-6 relative z-20 pt-2 md:pt-0;
   grid-area: intro;
+  font-size: clamp(15px, 1.6vw, 17.4px);
+
+  &__content {
+    @apply flex flex-col gap-6 items-start justify-start text-justify leading-[0.85];
+  }
+
+  &__creds {
+    @apply leading-[0.9] flex justify-between items-end gap-8 pb-1;
+
+    a {
+      @apply underline underline-offset-2 hover:decoration-transparent transition-colors;
+    }
+  }
 }
 
 .song {
-  &--high-days {
-    grid-area: high;
+  &--acrobats {
+    grid-area: acro;
   }
 
-  &--stars {
-    grid-area: stars;
+  &--bare-legs {
+    grid-area: bare;
   }
 
   &--cults {
@@ -142,15 +182,71 @@ export default {
   &--graveyard {
     grid-area: grave;
   }
+
+  &--high-days {
+    grid-area: high;
+  }
+
+  &--hypno {
+    grid-area: hypno;
+  }
+
+  &--stars {
+    grid-area: stars;
+  }
 }
 
-.creds {
-  @apply text-[14px] leading-[0.9] flex justify-between items-end lg:justify-start lg:flex-col gap-8 text-right h-full p-4 2xs:px-0 md:p-0;
-  grid-area: creds;
-  font-size: clamp(12px, 1.15vw, 17.4px);
+.btf-grid {
+  @apply relative pt-1;
+  @apply w-full overflow-hidden mx-auto;
+  @apply grid items-center justify-center gap-1;
 
-  a {
-    @apply underline underline-offset-1 2xl:underline-offset-0 hover:decoration-transparent transition-colors;
+  grid-template:
+    'stars'
+    'cults'
+    'dual'
+    'grave'
+    / 1fr;
+
+  @screen xs {
+    @apply max-w-none;
+
+    grid-template:
+      'stars cults' auto
+      'dual  grave' auto
+      'pro   copy' auto / 1fr 1fr;
   }
+
+  @screen md {
+    @apply py-0 h-svh gap-0;
+
+    grid-template:
+      '. . stars' auto
+      'cults . .' auto
+      '. dual .' auto
+      'grave . .' auto
+      'pro . copy' auto / 35ch 1fr 1fr;
+  }
+
+  @screen lg {
+    @apply h-svh gap-0;
+    grid-template:
+      '.   . stars         .     .    ' 1fr
+      'cults     .     .     .  .    ' 1fr
+      ' .      .       . dual     .    ' 1fr
+      '.    grave .    .       .      ' 1fr
+      'pro    .     .    .       copy  ' auto / 1fr 1fr 40ch 1fr 1fr;
+  }
+}
+
+.pronunciation {
+  @apply justify-start cursor-default;
+  grid-area: pro;
+}
+
+.copyright {
+  @apply cursor-default;
+  
+  grid-area: copy;
 }
 </style>

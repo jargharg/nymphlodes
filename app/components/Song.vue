@@ -4,12 +4,13 @@
     <slot />
 
     <div :class="['play-state', playState]">
-      <svg v-if="playState === 'playing'" viewBox="5 0 42 68" fill="currentColor">
-        <path d="M27 0h15v68H27zM0 0h15v68H0z" />
+      <svg v-if="playState === 'playing'" viewBox="5 0 42 68" fill="none" stroke="currentColor" stroke-width="1"
+        class="overflow-visible">
+        <path d="M27 0h15v68H27zM0 0h15v68H0z" vector-effect="non-scaling-stroke" />
       </svg>
 
-      <svg v-else viewBox="0 0 56 71" fill="currentColor">
-        <path d="M56 35 0 70V0z" />
+      <svg v-else viewBox="0 0 56 71" fill="none" stroke="currentColor" stroke-width="1" class="overflow-visible">
+        <path d="M56 35 0 70V0z" vector-effect="non-scaling-stroke" />
       </svg>
     </div>
 
@@ -100,34 +101,39 @@ export default {
 
 <style lang="scss" scoped>
 .song {
-  @apply relative h-full aspect-square overflow-hidden;
+  @apply relative h-full aspect-square overflow-hidden text-[10px];
+  
+  @screen xs {
+    font-size: clamp(15px, 1.6vw, 17.4px);
+  }
 
   &:hover {
     --opacity: 1;
   }
-
 }
 
 .title {
-  opacity: var(--opacity, 0);
-
   transform-origin: bottom;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.3s linear;
   @apply absolute bottom-1 left-0.5 w-full text-left pointer-events-none z-50 text-white;
+
+  @media (hover: hover) {
+    opacity: var(--opacity, 0);
+  }
 }
 
 .play-state {
-  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white pointer-events-none z-50;
+  @apply absolute top-1 left-1 text-white pointer-events-none z-50;
   @apply flex items-center justify-center;
-  opacity: var(--opacity, 0);
-  transition: opacity 0.3s ease;
+  opacity: var(--opacity, 0.9);
+  transition: opacity 0.3s linear;
 
   svg {
     @apply size-4;
   }
 
   &.paused {
-    opacity: 1;
+    --opacity: 1;
   }
 }
 

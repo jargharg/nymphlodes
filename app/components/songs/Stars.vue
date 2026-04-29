@@ -50,7 +50,7 @@ export default {
       tls.value = elsImages.value.slice(1).map((elImage, index) => {
         return gsap
           .timeline({ repeat: -1 })
-          .to(elImage, { rotation: 360, duration: 10 + index * 5, delay: -index * 5, ease: 'none' })
+          .to(elImage, { rotation: 360, duration: 12 + index * 5, delay: -index * 5, ease: 'none' })
           .timeScale(0)
       })
     })

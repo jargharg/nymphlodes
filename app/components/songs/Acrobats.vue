@@ -1,5 +1,5 @@
 <template>
-  <Song title="Cults" :song-id="songId">
+  <Song title="Acrobats" :song-id="songId">
     <img v-for="(_, index) in Array(imageCount)" :key="index" ref="elsImages" :src="imageSrc" class="image"
       aria-hidden="true" :style="{ '--inset': index > 0 && `${6 + (index * 10)}%` }">
   </Song>
@@ -10,14 +10,14 @@ import gsap from 'gsap'
 import { useSongStore } from '~/stores/songStore'
 
 export default {
-  name: 'Cults',
+  name: 'Acrobats',
 
   setup() {
     const elsImages = ref([])
-    const imageSrc = '/images/cults.avif'
+    const imageSrc = '/images/acrobats.avif'
     const imageCount = 5
     const tls = ref([])
-    const songId = 'cults'
+    const songId = 'acrobats'
 
     const songStore = useSongStore()
 

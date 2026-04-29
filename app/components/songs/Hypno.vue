@@ -1,5 +1,5 @@
 <template>
-  <Song title="Cults" :song-id="songId">
+  <Song title="Hypnotize" :song-id="songId">
     <img v-for="(_, index) in Array(imageCount)" :key="index" ref="elsImages" :src="imageSrc" class="image"
       aria-hidden="true" :style="{ '--inset': index > 0 && `${6 + (index * 10)}%` }">
   </Song>
@@ -10,14 +10,14 @@ import gsap from 'gsap'
 import { useSongStore } from '~/stores/songStore'
 
 export default {
-  name: 'Cults',
+  name: 'Hypno',
 
   setup() {
     const elsImages = ref([])
-    const imageSrc = '/images/cults.avif'
+    const imageSrc = '/images/hypno.avif'
     const imageCount = 5
     const tls = ref([])
-    const songId = 'cults'
+    const songId = 'hypnotize'
 
     const songStore = useSongStore()
 
@@ -50,8 +50,9 @@ export default {
       tls.value = elsImages.value.slice(1).reverse().map((elImage, index) => {
         return gsap
           .timeline({ repeat: -1 })
-          .to(elImage, { rotation: 360, duration: 12 + index * 4, delay: -index * 5, ease: 'none' })
-          .timeScale(0)
+          .to(elImage, { xPercent: 50, duration: 2 + index * 4, delay: -index * 2, ease: 'power3.inOut' })
+          .to(elImage, { xPercent: -50, duration: 2 + index * 4, delay: -index * 2, ease: 'power3.inOut' })
+        // .timeScale(0)
       })
     })
 
