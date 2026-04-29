@@ -1,3 +1,3 @@
 <template>
-  <Song title="Acrobats" song-id="acrobats" image-src="/images/acrobats.avif" />
+  <Song title="Acrobats" song-id="acrobats" image-src="/artwork/acrobats.avif" />
 </template>

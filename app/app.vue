@@ -1,6 +1,6 @@
 <template>
   <main>
-    <img v-if="!!currentSongId && isPlaying" :src="`/images/${currentSongId}.avif`" aria-hidden="true"
+    <img v-if="!!currentSongId && isPlaying" :src="`/artwork/${currentSongId}.avif`" aria-hidden="true"
       class="fixed top-0 left-0 w-full h-full object-cover z-0 pointer-events-none mix-blend-difference opacity-50"
       style="image-rendering: pixelated;">
 
@@ -115,31 +115,31 @@ export default {
 .main-grid {
   padding-top: env(safe-area-inset-top);
   grid-template:
-    'logo logo'
+    'logo  logo'
     'intro intro'
-    'high acro'
+    'acro  high'
     'hypno bare'
     / 1fr 1fr;
 
   @screen xs {
     grid-template:
-      'logo intro' auto
-      'high acro' 1fr
-      'bare hypno' 1fr / 1fr 1fr;
+      'logo  intro' auto
+      'acro  high' 1fr
+      'bare  hypno' 1fr / 1fr 1fr;
   }
 
   @screen md {
     grid-template:
-      'logo  .      high ' 1fr
-      'intro bare  . ' 1fr
+      'logo  .      acro ' 1fr
+      'intro high  . ' 1fr
       'intro .      hypno' 1fr
-      'intro  acro  btf' 1fr / 35ch 1fr 1fr;
+      'intro  bare  btf' 1fr / 35ch 1fr 1fr;
   }
 
   @screen lg {
     grid-template:
-      '.     high  .     .     .    ' 1fr
-      '.     .     logo  .     acro ' 1fr
+      '.     acro  .     .     .    ' 1fr
+      '.     .     logo  .     high ' 1fr
       'hypno .     intro .     .    ' 1fr
       '.     .     .     bare  btf  ' 1fr / 1fr 1fr 40ch 1fr 1fr;
   }

@@ -1,5 +1,5 @@
 <template>
-  <Song title="Stars" song-id="stars" image-src="/images/stars.avif" />
+  <Song title="Stars" song-id="stars" image-src="/artwork/stars.avif" />
 </template>
 
 <script>
