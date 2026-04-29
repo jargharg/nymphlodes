@@ -41,10 +41,12 @@
 
       <Graveyard class="song--graveyard" />
 
-      <p class="copyright">&copy; Nymph Lodes Productions {{ new Date().getFullYear()
-        }}</p>
+      <div class="footer">
+        <p class="pronunciation">nɪmf ləʊdz</p>
 
-      <p class="pronunciation">nɪmf ləʊdz</p>
+        <p class="copyright">&copy; Nymph Lodes Productions {{ new Date().getFullYear()
+          }}</p>
+      </div>
     </div>
   </main>
 </template>
@@ -111,6 +113,7 @@ export default {
 }
 
 .main-grid {
+  padding-top: env(safe-area-inset-top);
   grid-template:
     'logo logo'
     'intro intro'
@@ -144,28 +147,29 @@ export default {
 
 .btf-grid {
   padding-top: var(--gap);
+  padding-bottom: env(safe-area-inset-bottom);
 
   grid-template:
-    'stars cults' auto
-    'dual  grave' auto
-    'pro   copy' auto / 1fr 1fr;
+    'stars  cults' auto
+    'dual   grave' auto
+    'footer footer' auto / 1fr 1fr;
 
   @screen md {
     grid-template:
-      '. . stars' auto
-      'cults . .' auto
-      '. dual .' auto
-      'grave . .' auto
-      'pro . copy' auto / 35ch 1fr 1fr;
+      '.      .      stars' auto
+      'cults  .      .' auto
+      '.      dual   .' auto
+      'grave  .      .' auto
+      'footer footer footer' auto / 35ch 1fr 1fr;
   }
 
   @screen lg {
     grid-template:
-      '.   . stars         .     .    ' 1fr
-      'cults     .     .     .  .    ' 1fr
-      ' .      .       . dual     .    ' 1fr
-      '.    grave .    .       .      ' 1fr
-      'pro    .     .    .       copy  ' auto / 1fr 1fr 40ch 1fr 1fr;
+      '.      .      stars  .      .     ' 1fr
+      'cults  .      .      .      .     ' 1fr
+      '.      .      .      dual   .     ' 1fr
+      '.      grave  .      .      .     ' 1fr
+      'footer footer footer footer footer' auto / 1fr 1fr 40ch 1fr 1fr;
   }
 }
 
@@ -176,17 +180,6 @@ export default {
   img {
     width: 100%;
   }
-}
-
-.btf-link,
-.copyright,
-.pronunciation {
-  @apply text-[10px] items-end justify-end h-full p-4 grid;
-}
-
-.btf-link {
-  grid-area: btf;
-  @apply hidden md:grid;
 }
 
 .intro {
@@ -241,13 +234,18 @@ export default {
   }
 }
 
-.pronunciation {
-  @apply justify-start cursor-default;
-  grid-area: pro;
+.btf-link,
+.footer {
+  @apply text-[10px] items-end justify-end h-full p-4;
 }
 
-.copyright {
-  @apply cursor-default;
-  grid-area: copy;
+.btf-link {
+  grid-area: btf;
+  @apply hidden md:grid;
+}
+
+.footer {
+  @apply flex justify-between w-full cursor-default;
+  grid-area: footer;
 }
 </style>
