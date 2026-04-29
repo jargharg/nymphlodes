@@ -3,7 +3,7 @@ import { Howl } from 'howler'
 
 const createHowl = (id, volume = 0.8) => {
   return new Howl({
-    src: [`https://songs.nymphlodes.com/songs/${id}.mp3`],
+    src: [`https://songs.nymphlod.es/songs/${id}.mp3`],
     html5: true,
     preload: 'metadata',
     volume,
