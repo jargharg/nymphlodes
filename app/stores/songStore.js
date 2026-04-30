@@ -1,15 +1,19 @@
 import { defineStore } from 'pinia'
 import { Howl } from 'howler'
 
-const createHowl = (id, volume = 0.8) => {
+const createHowl = (id) => {
   return new Howl({
     src: [`https://songs.nymphlod.es/songs/${id}.mp3`],
     html5: true,
     preload: 'metadata',
-    volume,
     onend: () => {
       const songStore = useSongStore()
-      if (songStore.currentSongId === id) {
+
+      const playlistIndex = playlist.findIndex((song) => song === id)
+
+      if (playlistIndex > -1 && playlistIndex < playlist.length - 1) {
+        songStore.next()
+      } else if (songStore.currentSongId === id) {
         songStore.reset()
       }
     },
@@ -17,20 +21,20 @@ const createHowl = (id, volume = 0.8) => {
 }
 
 export const songs = {
-  'high-days-holy-days': { title: 'High Days & Holy Days', file: createHowl('high-days-holy-days', 1) },
+  'acrobats': { title: 'Acrobats', file: createHowl('acrobats') },
+  'bare-legs-night-dress': { title: 'Bare Legs, Night Dress', file: createHowl('bare-legs-night-dress') },
   'cults': { title: 'Cults', file: createHowl('cults') },
   'dual-realities': { title: 'Dual Realities', file: createHowl('dual-realities') },
-  'stars': { title: 'Stars', file: createHowl('stars') },
   'graveyard-tourist': { title: 'Graveyard Tourist', file: createHowl('graveyard-tourist') },
+  'high-days-holy-days': { title: 'High Days & Holy Days', file: createHowl('high-days-holy-days') },
   'hypnotize': { title: 'Hypnotize', file: createHowl('hypnotize') },
-  'bare-legs-night-dress': { title: 'Bare Legs, Night Dress', file: createHowl('bare-legs-night-dress') },
-  'acrobats': { title: 'Acrobats', file: createHowl('acrobats') },
+  'stars': { title: 'Stars', file: createHowl('stars') },
 }
 
 export const playlist = [
   'acrobats',
-  'high-days-holy-days',
   'hypnotize',
+  'high-days-holy-days',
   'bare-legs-night-dress',
 ]
 
@@ -42,9 +46,7 @@ export const useSongStore = defineStore('song', {
 
   getters: {
     currentSong(state) {
-      if (!state.currentSongId) {
-        return null
-      }
+      if (!state.currentSongId) return null
 
       if (songs[state.currentSongId]) {
         return songs[state.currentSongId]
@@ -52,14 +54,10 @@ export const useSongStore = defineStore('song', {
     },
 
     songProgress(state) {
-      if (!state.currentSongId) {
-        return 0
-      }
+      if (!state.currentSongId) return 0
 
       const song = songs[state.currentSongId]
-      if (!song) {
-        return 0
-      }
+      if (!song) return 0
 
       return song.file.seek() / song.file.duration()
     },
@@ -67,9 +65,7 @@ export const useSongStore = defineStore('song', {
 
   actions: {
     setCurrentSongId(id) {
-      if (this.currentSongId === id) {
-        return
-      }
+      if (this.currentSongId === id) return
 
       this.stop()
       this.currentSongId = id
@@ -92,9 +88,14 @@ export const useSongStore = defineStore('song', {
           navigator.mediaSession.metadata = new MediaMetadata({
             title: this.currentSong.title,
             artist: 'Nymph Lodes',
-            // artwork: [
-            //   { src: '/artworks/cover.png', sizes: '512x512', type: 'image/png' }, // @TODO: generate these for each song
-            // ],
+            artwork: [
+              { src: `/artworks/96px/${this.currentSongId}.jpg`, sizes: '96x96', type: 'image/jpg' },
+              { src: `/artworks/128px/${this.currentSongId}.jpg`, sizes: '128x128', type: 'image/jpg' },
+              { src: `/artworks/192px/${this.currentSongId}.jpg`, sizes: '192x192', type: 'image/jpg' },
+              { src: `/artworks/256px/${this.currentSongId}.jpg`, sizes: '256x256', type: 'image/jpg' },
+              { src: `/artworks/512px/${this.currentSongId}.jpg`, sizes: '512x512', type: 'image/jpg' },
+              { src: `/artworks/1024px/${this.currentSongId}.jpg`, sizes: '1024x1024', type: 'image/jpg' },
+            ],
           })
 
           navigator.mediaSession.setActionHandler('play', () => {
