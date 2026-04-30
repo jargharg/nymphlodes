@@ -11,13 +11,13 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: 'Nymph Lodes',
-      htmlAttrs: {
-        lang: 'en',
-      },
+      meta: [
+        { name: 'description', content: 'New music from the moors. Mildly mystical, slightly psychedelic songs about stars, cults, babes and other phenomena.' },
+      ],
+      htmlAttrs: { lang: 'en' },
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
-
       ],
     },
   },

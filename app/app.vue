@@ -3,13 +3,13 @@
     <img v-if="!!currentSongId && isPlaying" :src="`/artwork/${currentSongId}.avif`" aria-hidden="true" class="background-image">
 
     <div class="main-grid">
-      <h1 class="logo"><img src="/images/nymph-lodes-logo.svg" alt="Nymph Lodes"></h1>
+      <h1 class="logo"><img src="/images/nymph-lodes-logo.svg" alt="Nymph Lodes" width="219" height="103"></h1>
 
       <div class="intro">
         <div class="intro__content">
           <p>new music from the moors.</p>
           <p>where once were witches, now are <img class="h-[0.9em] inline-block"
-              src="/images/nymph-lodes-logo-landscape.svg" alt="Nymph Lodes"> — partners in music and marriage.</p>
+              src="/images/nymph-lodes-logo-landscape.svg" width="94.5" height="14.4" alt="Nymph Lodes"> — partners in music and marriage.</p>
           <p>mildly mystical, slightly psychedelic songs about stars, cults, babes and other phenomena.</p>
         </div>
 
