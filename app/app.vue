@@ -29,7 +29,7 @@
 
       <BareLegs class="song--bare-legs" />
 
-      <a class="btf-link" href="#btf">older stuff &darr;</a>
+      <a class="btf-link" href="#btf">old news &darr;</a>
     </div>
 
     <div id="btf" class="btf-grid">
@@ -45,7 +45,7 @@
         <p class="pronunciation">nɪmf ləʊdz</p>
 
         <p class="copyright">&copy; Nymph Lodes Productions {{ new Date().getFullYear()
-          }}</p>
+        }}</p>
       </div>
     </div>
   </main>
@@ -119,13 +119,14 @@ export default {
     'intro intro'
     'acro  hypno'
     'high  bare'
-    / 1fr 1fr;
+    'btf   btf' / 1fr 1fr;
 
   @screen xs {
     grid-template:
       'logo  intro' auto
       'acro  hypno' 1fr
-      'high  bare' 1fr / 1fr 1fr;
+      'high  bare' 1fr 
+      'btf   btf' auto / 1fr 1fr;
   }
 
   @screen md {
@@ -236,12 +237,12 @@ export default {
 
 .btf-link,
 .footer {
-  @apply text-[10px] items-end justify-end h-full p-4;
+  @apply text-[10px] items-end justify-end h-full py-2;
 }
 
 .btf-link {
   grid-area: btf;
-  @apply hidden md:grid;
+  @apply grid;
 }
 
 .footer {
