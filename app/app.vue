@@ -1,8 +1,6 @@
 <template>
   <main>
-    <img v-if="!!currentSongId && isPlaying" :src="`/artwork/${currentSongId}.avif`" aria-hidden="true"
-      class="fixed top-0 left-0 w-full h-full object-cover z-0 pointer-events-none mix-blend-difference opacity-50"
-      style="image-rendering: pixelated;">
+    <img v-if="!!currentSongId && isPlaying" :src="`/artwork/${currentSongId}.avif`" aria-hidden="true" class="background-image">
 
     <div class="main-grid">
       <h1 class="logo"><img src="/images/nymph-lodes-logo.svg" alt="Nymph Lodes"></h1>
@@ -42,10 +40,9 @@
       <Graveyard class="song--graveyard" />
 
       <div class="footer">
-        <p class="pronunciation">nɪmf ləʊdz</p>
+        <p>nɪmf ləʊdz</p>
 
-        <p class="copyright">&copy; Nymph Lodes Productions {{ new Date().getFullYear()
-        }}</p>
+        <p>&copy; Nymph Lodes Productions {{ new Date().getFullYear() }}</p>
       </div>
     </div>
   </main>
@@ -98,6 +95,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.background-image {
+  @apply fixed top-0 left-0 w-full h-full object-cover z-0 pointer-events-none mix-blend-difference opacity-50;
+  image-rendering: pixelated;
+}
+
 .main-grid,
 .btf-grid {
   --gap: theme('spacing.1');
@@ -125,8 +127,7 @@ export default {
     grid-template:
       'logo  intro' auto
       'acro  hypno' 1fr
-      'high  bare' 1fr 
-      'btf   btf' auto / 1fr 1fr;
+      'high  bare' 1fr 'btf   btf' auto / 1fr 1fr;
   }
 
   @screen md {
