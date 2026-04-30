@@ -27,13 +27,13 @@ export const songs = {
   'dual-realities': { title: 'Dual Realities', file: createHowl('dual-realities') },
   'graveyard-tourist': { title: 'Graveyard Tourist', file: createHowl('graveyard-tourist') },
   'high-days-holy-days': { title: 'High Days & Holy Days', file: createHowl('high-days-holy-days') },
-  'hypnotize': { title: 'Hypnotize', file: createHowl('hypnotize') },
+  'funeral-song': { title: 'Funeral Song', file: createHowl('funeral-song') },
   'stars': { title: 'Stars', file: createHowl('stars') },
 }
 
 export const playlist = [
   'acrobats',
-  'hypnotize',
+  'funeral-song',
   'high-days-holy-days',
   'bare-legs-night-dress',
 ]
@@ -88,14 +88,7 @@ export const useSongStore = defineStore('song', {
           navigator.mediaSession.metadata = new MediaMetadata({
             title: this.currentSong.title,
             artist: 'Nymph Lodes',
-            artwork: [
-              { src: `/artworks/96px/${this.currentSongId}.jpg`, sizes: '96x96', type: 'image/jpg' },
-              { src: `/artworks/128px/${this.currentSongId}.jpg`, sizes: '128x128', type: 'image/jpg' },
-              { src: `/artworks/192px/${this.currentSongId}.jpg`, sizes: '192x192', type: 'image/jpg' },
-              { src: `/artworks/256px/${this.currentSongId}.jpg`, sizes: '256x256', type: 'image/jpg' },
-              { src: `/artworks/512px/${this.currentSongId}.jpg`, sizes: '512x512', type: 'image/jpg' },
-              { src: `/artworks/1024px/${this.currentSongId}.jpg`, sizes: '1024x1024', type: 'image/jpg' },
-            ],
+            artwork: [{ src: `/artworks/512px/${this.currentSongId}.jpg` }],
           })
 
           navigator.mediaSession.setActionHandler('play', () => {

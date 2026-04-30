@@ -15,7 +15,7 @@
 
         <div class="intro__creds">
           <a href="https://www.instagram.com/_nymphlodes_" target="_blank" rel="noopener noreferrer">Instagram</a>
-          <a href="https://soundcloud.com/nymph-lodes" target="_blank" rel="noopener noreferrer">SoundCloud</a>
+          <a href="https://nymphlodes.bandcamp.com" target="_blank" rel="noopener noreferrer">Bandcamp</a>
         </div>
       </div>
 
@@ -23,7 +23,7 @@
 
       <Acrobats class="song--acrobats" />
 
-      <Hypnotize class="song--hypno" />
+      <FuneralSong class="song--hypno" />
 
       <BareLegs class="song--bare-legs" />
 
@@ -56,7 +56,7 @@ import Cults from './components/songs/Cults.vue'
 import DualRealities from './components/songs/DualRealities.vue'
 import Graveyard from './components/songs/Graveyard.vue'
 import HighDays from './components/songs/HighDays.vue'
-import Hypnotize from './components/songs/Hypnotize.vue'
+import FuneralSong from './components/songs/FuneralSong.vue'
 import Stars from './components/songs/Stars.vue'
 
 export default {
@@ -67,7 +67,7 @@ export default {
     DualRealities,
     Graveyard,
     HighDays,
-    Hypnotize,
+    FuneralSong,
     Stars,
   },
 
