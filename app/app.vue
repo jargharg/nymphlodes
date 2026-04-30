@@ -14,7 +14,7 @@
         </div>
 
         <div class="intro__creds">
-          <a href="https://www.instagram.com/_nymphlodes_" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a href="https://instagram.com/_nymphlodes_" target="_blank" rel="noopener noreferrer">Instagram</a>
           <a href="https://nymphlodes.bandcamp.com" target="_blank" rel="noopener noreferrer">Bandcamp</a>
         </div>
       </div>
