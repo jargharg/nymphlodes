@@ -117,30 +117,30 @@ export default {
   grid-template:
     'logo  logo'
     'intro intro'
-    'acro  high'
-    'hypno bare'
+    'acro  hypno'
+    'high  bare'
     / 1fr 1fr;
 
   @screen xs {
     grid-template:
       'logo  intro' auto
-      'acro  high' 1fr
-      'bare  hypno' 1fr / 1fr 1fr;
+      'acro  hypno' 1fr
+      'high  bare' 1fr / 1fr 1fr;
   }
 
   @screen md {
     grid-template:
       'logo  .      acro ' 1fr
-      'intro high  . ' 1fr
-      'intro .      hypno' 1fr
+      'intro hypno  . ' 1fr
+      'intro .      high' 1fr
       'intro  bare  btf' 1fr / 35ch 1fr 1fr;
   }
 
   @screen lg {
     grid-template:
       '.     acro  .     .     .    ' 1fr
-      '.     .     logo  .     high ' 1fr
-      'hypno .     intro .     .    ' 1fr
+      '.     .     logo  .     hypno ' 1fr
+      'high  .     intro .     .    ' 1fr
       '.     .     .     bare  btf  ' 1fr / 1fr 1fr 40ch 1fr 1fr;
   }
 }
