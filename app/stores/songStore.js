@@ -136,7 +136,7 @@ export const useSongStore = defineStore('song', {
     },
 
     stop() {
-      this.currentSong?.file.stop()
+      Object.values(songs).forEach((song) => song.file.stop())
       this.isPlaying = false
     },
 
@@ -150,6 +150,7 @@ export const useSongStore = defineStore('song', {
 
       if (currentIndex === -1 || currentIndex === playlist.length - 1) return
 
+      this.stop()
       this.setCurrentSongId(playlist[currentIndex + 1])
       this.play()
     },
@@ -159,6 +160,7 @@ export const useSongStore = defineStore('song', {
 
       if (currentIndex <= 0) return
 
+      this.stop()
       this.setCurrentSongId(playlist[currentIndex - 1])
       this.play()
     },
