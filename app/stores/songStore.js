@@ -82,6 +82,16 @@ export const useSongStore = defineStore('song', {
         this.isPlaying = true
         this.currentSong.file.play()
 
+        this.currentSong.file.on('end', () => {
+          const playlistIndex = playlist.findIndex((songId) => songId === this.currentSongId)
+
+          if (playlistIndex > -1 && playlistIndex < playlist.length - 1) {
+            this.next()
+          } else {
+            this.reset()
+          }
+        })
+
         if (navigator.mediaSession) {
           navigator.mediaSession.metadata = new MediaMetadata({
             title: this.currentSong.title,
@@ -132,7 +142,10 @@ export const useSongStore = defineStore('song', {
     },
 
     stop() {
-      Object.values(songs).forEach((song) => song.file.stop())
+      Object.values(songs).forEach((song) => {
+        song.file.stop()
+        song.file.off()
+      })
       this.isPlaying = false
     },
 

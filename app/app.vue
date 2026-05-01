@@ -80,8 +80,8 @@ export default {
 
     onMounted(() => {
       document.addEventListener('keydown', (e) => {
-        if (e.code === 'Space' || e.code === 'Enter' || e.code === 'Escape') {
-          songStore.toggle()
+        if (e.code === 'Escape') {
+          songStore.stop()
         }
       })
     })

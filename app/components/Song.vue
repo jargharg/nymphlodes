@@ -65,7 +65,6 @@ export default {
 
     const onClick = () => {
       songStore.setCurrentSongId(props.songId)
-      console.log(songStore);
 
       if (songStore.isPlaying) {
         songStore.pause()
