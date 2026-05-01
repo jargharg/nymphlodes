@@ -9,7 +9,7 @@ const createHowl = (id) => {
     onend: () => {
       const songStore = useSongStore()
 
-      const playlistIndex = playlist.findIndex((song) => song === id)
+      const playlistIndex = playlist.findIndex((songId) => songId === id)
 
       if (playlistIndex > -1 && playlistIndex < playlist.length - 1) {
         songStore.next()
@@ -73,7 +73,6 @@ export const useSongStore = defineStore('song', {
 
     play() {
       Object.values(songs).forEach((song) => {
-        song.isPlaying = song !== this.currentSong
         if (song !== this.currentSong) {
           song.file.stop()
         }
@@ -81,7 +80,6 @@ export const useSongStore = defineStore('song', {
 
       if (this.currentSong) {
         this.isPlaying = true
-        this.currentSong.isPlaying = true
         this.currentSong.file.play()
 
         if (navigator.mediaSession) {
@@ -107,17 +105,15 @@ export const useSongStore = defineStore('song', {
             this.currentSong.file.seek(seekTime)
           })
 
-          if (playlist.indexOf(this.currentSongId) > 0) {
-            navigator.mediaSession.setActionHandler('previoustrack', () => this.prev())
-          } else {
-            navigator.mediaSession.setActionHandler('previoustrack', null)
-          }
+          const indexInPlaylist = playlist.indexOf(this.currentSongId)
 
-          if (playlist.includes(this.currentSongId) && playlist.indexOf(this.currentSongId) < playlist.length - 1) {
-            navigator.mediaSession.setActionHandler('nexttrack', () => this.next())
-          } else {
-            navigator.mediaSession.setActionHandler('nexttrack', null)
-          }
+          navigator.mediaSession.setActionHandler('previoustrack',
+            indexInPlaylist > 0 ? () => this.prev() : null,
+          )
+
+          navigator.mediaSession.setActionHandler('nexttrack',
+            indexInPlaylist > -1 && indexInPlaylist < playlist.length - 1 ? () => this.next() : null,
+          )
         }
       }
     },
@@ -163,20 +159,6 @@ export const useSongStore = defineStore('song', {
       this.stop()
       this.setCurrentSongId(playlist[currentIndex - 1])
       this.play()
-    },
-
-    seekForwards(seconds = 10) {
-      if (!this.currentSong) return
-
-      const newTime = this.currentSong.file.seek() + seconds
-      this.currentSong.file.seek(newTime)
-    },
-
-    seekBackwards(seconds = 10) {
-      if (!this.currentSong) return
-
-      const newTime = this.currentSong.file.seek() - seconds
-      this.currentSong.file.seek(newTime)
     },
   },
 })

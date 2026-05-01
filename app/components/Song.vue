@@ -58,7 +58,7 @@ export default {
 
     const updateProgress = () => {
       if (shouldUpdateProgress) {
-        songProgress.value = song.file.seek() / song.file.duration()
+        songProgress.value = song.file.seek() / song.file.duration() || 0
         requestAnimationFrame(updateProgress)
       }
     }
