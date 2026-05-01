@@ -7,10 +7,10 @@
 
       <div class="intro">
         <div class="intro__content">
-          <p>new music from the moors.</p>
-          <p>where once were witches, now are <img class="h-[0.9em] inline-block"
+          <p>New music from the moors.</p>
+          <p>Where once were witches, now are <img class="h-[0.9em] inline-block"
               src="/images/nymph-lodes-logo-landscape.svg" width="94.5" height="14.4" alt="Nymph Lodes"> — partners in music and marriage.</p>
-          <p>mildly mystical, slightly psychedelic songs about stars, cults, babes and other phenomena.</p>
+          <p>Mildly mystical, slightly psychedelic songs about stars, cults, babes and other phenomena.</p>
         </div>
 
         <div class="intro__creds">
