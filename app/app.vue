@@ -7,15 +7,15 @@
 
       <div class="intro">
         <div class="intro__content">
-          <p>New music from the moors.</p>
-          <p>Where once were witches, now are <img class="h-[0.9em] inline-block"
+          <p>new music from the moors.</p>
+          <p>where once were witches, now are <img class="h-[0.9em] inline-block"
               src="/images/nymph-lodes-logo-landscape.svg" width="94.5" height="14.4" alt="Nymph Lodes"> — partners in music and marriage.</p>
-          <p>Mildly mystical, slightly psychedelic songs about stars, cults, babes and other phenomena.</p>
+          <p>mildly mystical, slightly psychedelic songs about stars, cults, babes and other phenomena.</p>
         </div>
 
         <div class="intro__creds">
-          <a href="https://instagram.com/_nymphlodes_" target="_blank" rel="noopener noreferrer">Instagram</a>
-          <a href="https://nymphlodes.bandcamp.com" target="_blank" rel="noopener noreferrer">Bandcamp</a>
+          <a href="https://instagram.com/_nymphlodes_" target="_blank" rel="noopener noreferrer">instagram</a>
+          <a href="https://nymphlodes.bandcamp.com" target="_blank" rel="noopener noreferrer">bandcamp</a>
         </div>
       </div>
 
@@ -42,7 +42,7 @@
       <div class="footer">
         <p>nɪmf ləʊdz</p>
 
-        <p>&copy; Nymph Lodes Productions {{ new Date().getFullYear() }}</p>
+        <p>&copy; nymph lodes productions {{ new Date().getFullYear() }}</p>
       </div>
     </div>
   </main>
