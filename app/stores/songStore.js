@@ -77,13 +77,15 @@ export const useSongStore = defineStore('song', {
           song.file.stop()
         }
       })
+      
+      const songId = this.currentSongId
 
       if (this.currentSong) {
         this.isPlaying = true
         this.currentSong.file.play()
 
-        this.currentSong.file.on('end', () => {
-          const playlistIndex = playlist.findIndex((songId) => songId === this.currentSongId)
+        this.currentSong.file.once('end', () => {
+          const playlistIndex = playlist.findIndex((id) => id === songId)
 
           if (playlistIndex > -1 && playlistIndex < playlist.length - 1) {
             this.next()
