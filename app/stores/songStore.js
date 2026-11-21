@@ -21,14 +21,14 @@ const createHowl = (id) => {
 }
 
 export const songs = {
-  'acrobats': { title: 'acrobats', file: createHowl('acrobats') },
-  'bare-legs-night-dress': { title: 'bare legs, night dress', file: createHowl('bare-legs-night-dress') },
-  'cults': { title: 'cults', file: createHowl('cults') },
-  'dual-realities': { title: 'dual realities', file: createHowl('dual-realities') },
-  'graveyard-tourist': { title: 'graveyard tourist', file: createHowl('graveyard-tourist') },
-  'high-days-holy-days': { title: 'high days & holy days', file: createHowl('high-days-holy-days') },
-  'funeral-song': { title: 'funeral song', file: createHowl('funeral-song') },
-  'stars': { title: 'stars', file: createHowl('stars') },
+  'acrobats': { title: 'acrobats', file: createHowl('acrobats-gap') },
+  'bare-legs-night-dress': { title: 'bare legs, night dress', file: createHowl('bare-legs-night-dress-gap') },
+  'cults': { title: 'cults', file: createHowl('cults-gap') },
+  'dual-realities': { title: 'dual realities', file: createHowl('dual-realities-gap') },
+  'graveyard-tourist': { title: 'graveyard tourist', file: createHowl('graveyard-tourist-gap') },
+  'high-days-holy-days': { title: 'high days & holy days', file: createHowl('high-days-holy-days-gap') },
+  'funeral-song': { title: 'funeral song', file: createHowl('funeral-song-gap') },
+  'stars': { title: 'stars', file: createHowl('stars-gap') },
 }
 
 export const playlist = [
